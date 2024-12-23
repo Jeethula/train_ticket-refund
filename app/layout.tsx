@@ -72,7 +72,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           {/* Navigation with Backlinks */}
           {/* <nav className="py-4">
             <ul className="flex space-x-4">
