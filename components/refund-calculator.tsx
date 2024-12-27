@@ -59,6 +59,12 @@ export function RefundCalculator() {
 
         {selectedMenu === 'calculator' && (
           <div className="max-w-2xl mx-auto">
+                        <Alert className="mb-6">
+              <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                This calculator works only for e-tickets and normal trains. For special trains and Tatkal tickets, please refer to the rules section.
+                </AlertDescription>
+            </Alert>
             <Card className="p-6">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

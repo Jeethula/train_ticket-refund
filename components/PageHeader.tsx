@@ -1,4 +1,5 @@
 import { Train } from 'lucide-react';
+import { ThemeToggle } from './theme-toggle';
 
 export function PageHeader() {
   return (
@@ -8,6 +9,7 @@ export function PageHeader() {
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Train Ticket Refund Calculator
         </h1>
+        <ThemeToggle />
       </div>
       <p className="text-gray-600 dark:text-gray-300">
         Calculate your Indian Railways ticket refund amount instantly
