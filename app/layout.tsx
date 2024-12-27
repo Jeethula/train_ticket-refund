@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   title: 'IRCTC Train Refund Calculator | Calculate Your Ticket Refund',
   description: 'Calculate your train ticket refund amount instantly based on official IRCTC rules. Free online tool for Indian Railways passengers.',
   keywords: 'IRCTC refund, train ticket refund, Indian Railways refund calculator, railway refund rules',
-  authors: [{ name: 'Your Name' }],
+  authors: [{ name: 'jeethu' }],
   viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
 };
@@ -38,7 +39,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Primary Meta Tags */}
-        <link rel="canonical" href="https://yourwebsite.com/refund-calculator" />
+        <link rel="canonical" href="https://railrefund.ninja" />
         <meta name="language" content="English" />
 
         {/* Open Graph */}
@@ -60,6 +61,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         {/* JSON-LD Structured Data */}
+        <Script defer src="https://cloud.umami.is/script.js" data-website-id="ac4a2d35-81d6-4c0f-ba80-3becc91c0f15"></Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -89,3 +91,4 @@ export default function RootLayout({
     </html>
   );
 }
+
