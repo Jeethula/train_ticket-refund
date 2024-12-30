@@ -172,7 +172,8 @@ interface CalculateRefundParams {
   passengers: number;
 }
 
-// Flat cancellation fee per passenger (including GST)
+// Flat cancellation fee per passenger (including GST). AKA clerk charges
+// These charges were fixed cancellation charges regardless of ticket price.
 const FLAT_RATES = {
   'ac1': 240,
   'ac2': 200,
@@ -208,10 +209,16 @@ export function calculateRefund({
   if (ticketType === 'rac-waitlist') {
     // Cancellation charge of Rs.60 per passenger including GST
     cancellationCharge = 60 * passengers;
+    if (cancellationTime === '48-plus' || cancellationTime === '48-12' || cancellationTime === '12-4') {
+      // if an rac-waitlist ticket is cancelled before 4 hours of departure, an additional cancellation charge of Rs. 20 per passenger will be deducted
+      cancellationCharge += 20 * passengers;
+    }
     refundAmount = ticketAmount - cancellationCharge;
     return { 
+      totalAmount: ticketAmount,
       refundAmount: Math.max(0, refundAmount), 
-      cancellationCharge: Math.min(cancellationCharge, ticketAmount) 
+      cancellationCharge: Math.min(cancellationCharge, ticketAmount),
+      cancellationPercentage: (cancellationCharge * 100 / ticketAmount),
     };
   }
 
@@ -255,10 +262,12 @@ export function calculateRefund({
   cancellationCharge = Math.min(cancellationCharge, ticketAmount);
 
   // Calculate refund amount
-  refundAmount = ticketAmount - cancellationCharge;
+  refundAmount = Math.max(0, ticketAmount - cancellationCharge);
 
-  return { 
+  return {
+    totalAmount: ticketAmount,
     refundAmount: Math.max(0, refundAmount), 
-    cancellationCharge 
+    cancellationCharge,
+    cancellationPercentage: (cancellationCharge * 100 / ticketAmount), 
   };
 }

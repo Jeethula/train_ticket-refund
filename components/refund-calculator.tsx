@@ -15,7 +15,7 @@ import { TICKET_TYPES, TRAIN_CLASSES, CANCELLATION_TIMES } from '@/lib/constants
 import { calculateRefund } from '@/lib/calculate-refund';
 import { PageHeader } from '@/components/PageHeader';
 import { MenuToggle } from '@/components/MenuToggle';
-import { RefundResult } from '@/components/RefundResult';
+import { RefundResult, RefundResultProps } from '@/components/RefundResult';
 import { CancellationRules } from '@/components/CancellationRules';
 import { Footer } from '@/components/Footer';
 
@@ -28,7 +28,7 @@ const formSchema = z.object({
 });
 
 export function RefundCalculator() {
-  const [result, setResult] = useState<{ refundAmount: number; cancellationCharge: number } | null>(null);
+  const [result, setResult] = useState<RefundResultProps | null>(null);
   const [selectedMenu, setSelectedMenu] = useState<'calculator' | 'rules'>('calculator');
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -194,7 +194,7 @@ export function RefundCalculator() {
                   </Button>
                 </form>
               </Form>
-              {result && <RefundResult result={result} />}
+              {result && <RefundResult {...result} />}
             </Card>
             <Alert className="mt-6">
               <AlertCircle className="h-4 w-4" />
